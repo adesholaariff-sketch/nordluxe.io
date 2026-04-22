@@ -5,8 +5,8 @@
   "main": "assets/js/server.js",
   "scripts": {
     "dev": "nodemon assets/js/server.js",
-  "start": "node assets/js/server.js",
-    "build": "echo 'Static site - no build needed'",
+    "start": "node assets/js/server.js",
+    "build": "vite build",
     "deploy": "bash deploy.sh",
     "security-audit": "bash security-audit.sh",
     "audit": "npm audit",
@@ -50,7 +50,8 @@
     "passport-apple": "^2.0.2",
     "passport-google-oauth20": "^2.0.0",
     "qrcode": "^1.5.4",
-    "resend": "^4.8.0"
+    "resend": "^4.8.0",
+    "vite": "^8.0.9"
   },
   "devDependencies": {
     "dotenv": "^17.4.2",
