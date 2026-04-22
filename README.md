@@ -19,10 +19,10 @@ NORDLUXE now includes customer account login with multiple authentication method
 
 2. **Configure Environment Variables**
    Copy `.env.example` to `.env` and fill in:
-   - `EMAIL_USER` & `EMAIL_PASS` - Gmail credentials (use app password)
+   - `RESEND_API_KEY` - API key from resend.com
+   - `EMAIL_FROM` - Verified sender address (e.g. `NORDLUXE <noreply@yourdomain.com>`)
    - `GOOGLE_CLIENT_ID` & `GOOGLE_CLIENT_SECRET` - From Google Cloud Console
    - `APPLE_CLIENT_ID`, `APPLE_TEAM_ID`, etc. - From Apple Developer Console
-   - `MONGODB_URI` - MongoDB connection string
 
 3. **Start Server**
    ```bash

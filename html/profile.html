@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NORDLUXE | Customer Profile</title>
+<meta name="description" content="Manage your NORDLUXE account profile, addresses, and preferences for a personalized royal luxury shopping experience.">
+<meta name="robots" content="noindex, nofollow">
+<title>My Profile | NORDLUXE Account</title>
 
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -38,6 +40,20 @@ nav {
   top: 0;
   z-index: 1000;
   box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  white-space: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.nav-links::-webkit-scrollbar {
+  display: none;
 }
 
 .logo img {
@@ -137,6 +153,15 @@ nav a {
   border-bottom: 1px solid #f2f2f2;
 }
 
+.list-item.order-clickable {
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.list-item.order-clickable:hover {
+  background: #fffcf5;
+}
+
 .list-item:last-child {
   border-bottom: none;
 }
@@ -150,6 +175,20 @@ nav a {
   margin-top: 4px;
   font-size: 12px;
   color: #666;
+}
+
+.item-products {
+  margin-top: 8px;
+  font-size: 13px;
+  color: #303030;
+  line-height: 1.5;
+}
+
+.track-id-line {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #7e560f;
+  font-weight: 700;
 }
 
 .badge {
@@ -193,14 +232,266 @@ nav a {
   color: #7e560f;
 }
 
+.orders-help {
+  padding: 12px 18px 0;
+  font-size: 12px;
+  color: #7a6d57;
+}
+
+.order-row-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.order-preview-images {
+  margin-top: 10px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.order-preview-thumb {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  object-fit: cover;
+  border: 1px solid #ead8b2;
+  background: #fff8ea;
+}
+
+.order-hint {
+  margin-top: 10px;
+  font-size: 11px;
+  color: #8b6f37;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+
+.order-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(17, 13, 8, 0.58);
+  backdrop-filter: blur(10px);
+  z-index: 2000;
+}
+
+.order-modal.open {
+  display: flex;
+}
+
+.order-modal-card {
+  width: min(960px, 100%);
+  max-height: min(88vh, 920px);
+  overflow: hidden;
+  border-radius: 22px;
+  border: 1px solid rgba(209,155,72,0.35);
+  background: linear-gradient(180deg, #fffdf8 0%, #f7f2e7 100%);
+  box-shadow: 0 28px 70px rgba(0,0,0,0.24);
+}
+
+.order-modal-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 22px 24px 18px;
+  border-bottom: 1px solid #eee0c0;
+  background: linear-gradient(135deg, rgba(209,155,72,0.12), rgba(255,255,255,0.75));
+}
+
+.order-modal-kicker {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #8b6f37;
+  margin-bottom: 7px;
+  font-weight: 700;
+}
+
+.order-modal-title {
+  font-size: 28px;
+  color: #1c1710;
+  margin-bottom: 6px;
+}
+
+.order-modal-subtitle {
+  font-size: 14px;
+  color: #665a48;
+  line-height: 1.6;
+}
+
+.order-modal-close {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid #dbc28e;
+  background: #fff;
+  color: #7e560f;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.order-modal-body {
+  max-height: calc(88vh - 110px);
+  overflow-y: auto;
+  padding: 22px 24px 24px;
+}
+
+.order-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(150px, 1fr));
+  gap: 12px;
+}
+
+.order-summary-tile {
+  padding: 14px 15px;
+  border-radius: 14px;
+  border: 1px solid #ead8b2;
+  background: rgba(255,255,255,0.78);
+}
+
+.order-summary-label {
+  font-size: 10px;
+  letter-spacing: 1.7px;
+  text-transform: uppercase;
+  color: #8a7958;
+  margin-bottom: 7px;
+}
+
+.order-summary-value {
+  font-size: 15px;
+  font-weight: 700;
+  color: #17130e;
+  line-height: 1.4;
+}
+
+.order-section {
+  margin-top: 20px;
+}
+
+.order-section-title {
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #8b6f37;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.order-items-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.order-item-card {
+  display: grid;
+  grid-template-columns: 104px 1fr;
+  gap: 14px;
+  padding: 14px;
+  border-radius: 16px;
+  border: 1px solid #ead9b8;
+  background: rgba(255,255,255,0.82);
+}
+
+.order-item-image {
+  width: 104px;
+  height: 104px;
+  border-radius: 14px;
+  object-fit: cover;
+  background: #fff8ea;
+  border: 1px solid #ecdcb8;
+}
+
+.order-item-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #18130d;
+}
+
+.order-item-meta {
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.order-item-meta span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #fff6df;
+  border: 1px solid #edd8a4;
+  font-size: 12px;
+  color: #674b17;
+}
+
+.order-item-pricing {
+  margin-top: 10px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: #4f4638;
+}
+
+.order-item-pricing strong {
+  color: #17130e;
+}
+
+@media (max-width: 900px) {
+  .order-summary-grid {
+    grid-template-columns: repeat(2, minmax(140px, 1fr));
+  }
+
+  .order-modal {
+    padding: 14px;
+  }
+}
+
+@media (max-width: 680px) {
+  .order-modal-header {
+    padding: 18px;
+  }
+
+  .order-modal-title {
+    font-size: 24px;
+  }
+
+  .order-modal-body {
+    padding: 18px;
+  }
+
+  .order-item-card {
+    grid-template-columns: 1fr;
+  }
+
+  .order-item-image {
+    width: 100%;
+    height: 220px;
+  }
+}
+
 @media (max-width: 900px) {
   nav {
     padding: 18px 18px;
   }
 
+  .nav-links {
+    gap: 12px;
+    padding: 0 8px;
+  }
+
   nav a {
-    margin-left: 14px;
+    margin-left: 0;
     font-size: 13px;
+    flex-shrink: 0;
   }
 
   .grid {
@@ -209,6 +500,37 @@ nav a {
 
   .stats {
     grid-template-columns: repeat(2, minmax(120px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    gap: 10px;
+  }
+  nav a {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 600px) {
+  nav {
+    padding: 16px 15px;
+  }
+  .nav-links {
+    gap: 8px;
+    padding: 0 5px;
+  }
+  nav a {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-links {
+    gap: 6px;
+  }
+  nav a {
+    font-size: 10px;
   }
 }
 </style>
@@ -220,6 +542,7 @@ nav a {
   <div class="nav-links">
     <a href="index.html">Home</a>
     <a href="collections.html">Collection</a>
+    <a href="orders.html">My Orders</a>
     <a href="cart.html" class="cart-btn">🛒 Cart</a>
     <a href="contact.html">Contact</a>
   </div>
@@ -227,7 +550,7 @@ nav a {
 
 <div class="container">
   <section class="hero" data-aos="fade-up">
-    <h1 id="profileName">Customer Profile</h1>
+    <h1 id="profileName">Customer Profile <span id="profileOrderId" style="display:none;font-size:16px;font-weight:600;opacity:.9;margin-left:10px;"></span></h1>
     <p>Track your journey with NORDLUXE in one place: what you searched, what you ordered, and your account activity timeline.</p>
     <div class="stats">
       <div class="stat"><div>Searches</div><strong id="searchCount">0</strong></div>
@@ -249,6 +572,7 @@ nav a {
       <div class="panel-header">
         <h2>Order History</h2>
       </div>
+      <div class="orders-help">Select any order to view the full breakdown, item images, payment details, and order reference.</div>
       <div class="panel-body" id="orderList"></div>
     </div>
 
@@ -266,6 +590,20 @@ nav a {
   </div>
 </div>
 
+<div class="order-modal" id="orderDetailsModal" aria-hidden="true">
+  <div class="order-modal-card" role="dialog" aria-modal="true" aria-labelledby="orderDetailsTitle">
+    <div class="order-modal-header">
+      <div>
+        <div class="order-modal-kicker">Order History</div>
+        <div class="order-modal-title" id="orderDetailsTitle">Order details</div>
+        <div class="order-modal-subtitle" id="orderDetailsSubtitle"></div>
+      </div>
+      <button class="order-modal-close" type="button" id="orderDetailsCloseBtn" aria-label="Close order details">×</button>
+    </div>
+    <div class="order-modal-body" id="orderDetailsBody"></div>
+  </div>
+</div>
+
 <script>
 function readJson(key, fallback) {
   try {
@@ -273,6 +611,14 @@ function readJson(key, fallback) {
   } catch (e) {
     return fallback;
   }
+}
+
+function getUserKey(base) {
+  try {
+    var u = JSON.parse(localStorage.getItem('nordluxeUser') || '{}');
+    var uid = u.uid || u.id || '';
+    return uid ? base + '_' + uid : base;
+  } catch(e) { return base; }
 }
 
 function formatDate(value) {
@@ -294,19 +640,265 @@ function renderList(containerId, items, renderItem, emptyText) {
   container.innerHTML = items.map(renderItem).join('');
 }
 
+function escapeHtml(value) {
+  return String(value || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+let currentProfileOrders = [];
+
+const profileOrderImageMap = {
+  'Nordluxe Long Ascension White': '/assets/images/white%20long.png',
+  'Nordluxe Short Ascension White': '/assets/images/wite%20short.png',
+  'Nordluxe Long Ascension Black': '/assets/images/long%20black.png',
+  'Nordluxe Short Ascension Black': '/assets/images/black%20short.png',
+  'Cloak White': '/assets/images/cloak%20white.png',
+  'Cloak Black': '/assets/images/cloak%20black.png',
+  'Nordluxe Full Ascension White Bundle': '/assets/images/cloak%20white.png',
+  'Nordluxe Full Ascension Black Bundle': '/assets/images/cloak%20black.png',
+  'Full Package (White + Black) Complete Collection': '/assets/images/Full%20package.png'
+};
+
+function setProfileOrderIdLabel(orderIdValue) {
+  const label = document.getElementById('profileOrderId');
+  if (!label) return;
+
+  const raw = (orderIdValue || '').toString().trim().replace(/^#/, '');
+  if (!raw) {
+    label.style.display = 'none';
+    label.textContent = '';
+    return;
+  }
+
+  const orderRef = raw.toUpperCase();
+  if (!orderRef) {
+    label.style.display = 'none';
+    label.textContent = '';
+    return;
+  }
+
+  label.textContent = `• Order Ref: ${orderRef}`;
+  label.style.display = 'inline';
+}
+
+function getTrackingIdFromOrder(order) {
+  if (!order) return '';
+  const base = String(order.orderCode || order.orderId || order.orderIdShort || order.orderRef || order.txRef || order.transactionId || '').trim();
+  if (/^NLX-[A-Z0-9]{8}$/i.test(base)) return base.toUpperCase();
+  if (/^[A-Z0-9]{8}$/i.test(base)) return `NLX-${base.toUpperCase()}`;
+  return base.toUpperCase();
+}
+
+function getOrderProducts(order) {
+  const items = Array.isArray(order && order.items) ? order.items : [];
+  if (!items.length) return 'No product details available';
+  return items.map((item) => String((item && (item.name || item.itemName)) || 'Unnamed Product').trim()).filter(Boolean).join(' • ');
+}
+
+function getOrderPrimaryDate(order) {
+  return order && (order.createdAt || order.completedAt || order.updatedAt || order.at) ? (order.createdAt || order.completedAt || order.updatedAt || order.at) : '';
+}
+
+function getOrderUniqueKey(order) {
+  return String(
+    order && (order.orderCode || order.orderRef || order.txRef || order.paymentReference || order.flutterwaveRef || order.transactionId || order._id || `${getOrderPrimaryDate(order)}-${order.customerEmail || ''}`)
+  ).trim();
+}
+
+function dedupeOrders(orders) {
+  const seen = new Set();
+  return (Array.isArray(orders) ? orders : []).filter(function (order) {
+    const key = getOrderUniqueKey(order);
+    if (!key || seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+function sortOrdersByNewest(orders) {
+  return orders.slice().sort(function (left, right) {
+    return new Date(getOrderPrimaryDate(right) || 0).getTime() - new Date(getOrderPrimaryDate(left) || 0).getTime();
+  });
+}
+
+function getOrderItemName(item) {
+  return String((item && (item.name || item.itemName || item.title)) || 'Unnamed Product').trim();
+}
+
+function getOrderItemImage(item) {
+  const explicitImage = item && (item.image || item.imageUrl || item.imageSrc || item.thumbnail);
+  if (explicitImage) return explicitImage;
+  const name = getOrderItemName(item);
+  const normalizedName = name.replace(/\s*\([^)]*\)\s*$/, '');
+  return profileOrderImageMap[normalizedName] || profileOrderImageMap[name] || '/assets/images/sa.jpg';
+}
+
+function getOrderItemQuantity(item) {
+  const numericQuantity = Number(item && (item.quantity || item.qty || item.count));
+  return Number.isFinite(numericQuantity) && numericQuantity > 0 ? numericQuantity : 1;
+}
+
+function getOrderItemPriceText(item) {
+  if (!item || typeof item !== 'object') return 'N/A';
+  const candidates = [item.depositPrice, item.preorderPrice, item.originalPrice, item.finalPrice, item.price];
+  for (let index = 0; index < candidates.length; index += 1) {
+    const value = candidates[index];
+    if (typeof value === 'number') return formatNairaAmount(value);
+    if (typeof value === 'string' && value.trim()) return value.replace(/\$/g, '₦').replace(/\bUSD\b/gi, 'NGN');
+  }
+  return 'N/A';
+}
+
+function getOrderCustomerName(order) {
+  if (!order || typeof order !== 'object') return 'Customer';
+  if (order.customer && (order.customer.firstName || order.customer.lastName)) {
+    return `${order.customer.firstName || ''} ${order.customer.lastName || ''}`.trim();
+  }
+  return String(order.customerName || '').trim() || 'Customer';
+}
+
+function renderOrderHistory(orders) {
+  currentProfileOrders = sortOrdersByNewest(dedupeOrders(orders));
+  document.getElementById('orderCount').textContent = String(currentProfileOrders.length);
+
+  renderList(
+    'orderList',
+    currentProfileOrders.slice(0, 50),
+    function (order, index) {
+      const total = normalizeOrderAmountLabel(order);
+      const itemCount = Array.isArray(order.items) ? order.items.length : 0;
+      const trackingId = getTrackingIdFromOrder(order) || 'Pending';
+      const products = getOrderProducts(order);
+      const previewItems = (Array.isArray(order.items) ? order.items : []).slice(0, 4);
+      const previewHtml = previewItems.map(function (item) {
+        return `<img class="order-preview-thumb" src="${escapeHtml(getOrderItemImage(item))}" alt="${escapeHtml(getOrderItemName(item))}">`;
+      }).join('');
+      const placedAt = formatDate(getOrderPrimaryDate(order));
+      const statusText = String(order.status || 'paid').replace(/-/g, ' ');
+      return `<div class="list-item order-clickable" data-order-index="${index}"><div class="order-row-head"><div class="item-title"><span class="badge">${escapeHtml(total)}</span>${itemCount} item(s)</div><div class="item-meta">${escapeHtml(statusText)}</div></div><div class="item-products">${escapeHtml(products)}</div><div class="order-preview-images">${previewHtml}</div><div class="track-id-line">Order Ref: ${escapeHtml(trackingId)}</div><div class="item-meta">Placed: ${escapeHtml(placedAt)}</div><div class="order-hint">Tap to view full order breakdown</div></div>`;
+    },
+    'No orders yet. Your completed orders will show here.'
+  );
+}
+
+function openOrderDetails(orderIndex) {
+  const order = currentProfileOrders[orderIndex];
+  if (!order) return;
+
+  const modal = document.getElementById('orderDetailsModal');
+  const title = document.getElementById('orderDetailsTitle');
+  const subtitle = document.getElementById('orderDetailsSubtitle');
+  const body = document.getElementById('orderDetailsBody');
+  const trackingId = getTrackingIdFromOrder(order) || 'Pending';
+  const customerName = getOrderCustomerName(order);
+  const items = Array.isArray(order.items) ? order.items : [];
+  const orderStatus = String(order.status || 'paid').replace(/-/g, ' ');
+  const totalLabel = normalizeOrderAmountLabel(order);
+  const depositLabel = order.totalLabel || (typeof order.total === 'number' ? formatNairaAmount(order.total) : 'N/A');
+  const preorderLabel = order.preorderTotalLabel || (order.paymentPlan && typeof order.paymentPlan.preorderTotal === 'number' ? formatNairaAmount(order.paymentPlan.preorderTotal) : totalLabel);
+  const balanceLabel = order.balanceTotalLabel || (order.paymentPlan && typeof order.paymentPlan.remainingBalance === 'number' ? formatNairaAmount(order.paymentPlan.remainingBalance) : 'N/A');
+
+  title.textContent = trackingId;
+  subtitle.textContent = `${customerName} • ${items.length} item(s) • ${formatDate(getOrderPrimaryDate(order))}`;
+
+  body.innerHTML = `
+    <div class="order-summary-grid">
+      <div class="order-summary-tile"><div class="order-summary-label">Status</div><div class="order-summary-value">${escapeHtml(orderStatus)}</div></div>
+      <div class="order-summary-tile"><div class="order-summary-label">Amount Paid</div><div class="order-summary-value">${escapeHtml(totalLabel)}</div></div>
+      <div class="order-summary-tile"><div class="order-summary-label">Full Order Total</div><div class="order-summary-value">${escapeHtml(preorderLabel)}</div></div>
+      <div class="order-summary-tile"><div class="order-summary-label">Remaining Balance</div><div class="order-summary-value">${escapeHtml(balanceLabel)}</div></div>
+    </div>
+    <div class="order-section">
+      <div class="order-section-title">Order Snapshot</div>
+      <div class="order-summary-grid">
+        <div class="order-summary-tile"><div class="order-summary-label">Order Reference</div><div class="order-summary-value">${escapeHtml(trackingId)}</div></div>
+        <div class="order-summary-tile"><div class="order-summary-label">Transaction</div><div class="order-summary-value">${escapeHtml(String(order.transactionId || order.txRef || order.paymentReference || order.flutterwaveRef || 'Not available'))}</div></div>
+        <div class="order-summary-tile"><div class="order-summary-label">Customer</div><div class="order-summary-value">${escapeHtml(customerName)}</div></div>
+        <div class="order-summary-tile"><div class="order-summary-label">Payment Plan</div><div class="order-summary-value">${escapeHtml(String((order.paymentPlan && order.paymentPlan.type) || 'standard').replace(/-/g, ' '))}</div></div>
+      </div>
+    </div>
+    <div class="order-section">
+      <div class="order-section-title">Items In This Order</div>
+      <div class="order-items-grid">
+        ${items.map(function (item) {
+          const quantity = getOrderItemQuantity(item);
+          const size = item && (item.size || item.selectedSize || item.variant || item.option);
+          const color = item && (item.color || item.selectedColor);
+          const depositPrice = item && item.depositPrice ? item.depositPrice : '';
+          const preorderPrice = item && item.preorderPrice ? item.preorderPrice : '';
+          const remainingBalance = item && item.remainingBalancePrice ? item.remainingBalancePrice : '';
+          return `<div class="order-item-card"><img class="order-item-image" src="${escapeHtml(getOrderItemImage(item))}" alt="${escapeHtml(getOrderItemName(item))}"><div><div class="order-item-name">${escapeHtml(getOrderItemName(item))}</div><div class="order-item-meta"><span>Qty: ${escapeHtml(String(quantity))}</span>${size ? `<span>Size: ${escapeHtml(String(size))}</span>` : ''}${color ? `<span>Color: ${escapeHtml(String(color))}</span>` : ''}</div><div class="order-item-pricing"><div><strong>Primary price:</strong> ${escapeHtml(getOrderItemPriceText(item))}</div>${depositPrice ? `<div><strong>Deposit:</strong> ${escapeHtml(String(depositPrice).replace(/\$/g, '₦').replace(/\bUSD\b/gi, 'NGN'))}</div>` : ''}${preorderPrice ? `<div><strong>Preorder total:</strong> ${escapeHtml(String(preorderPrice).replace(/\$/g, '₦').replace(/\bUSD\b/gi, 'NGN'))}</div>` : ''}${remainingBalance ? `<div><strong>Remaining balance:</strong> ${escapeHtml(String(remainingBalance).replace(/\$/g, '₦').replace(/\bUSD\b/gi, 'NGN'))}</div>` : ''}</div></div></div>`;
+        }).join('') || '<div class="empty">No item details available for this order.</div>'}
+      </div>
+    </div>
+  `;
+
+  modal.classList.add('open');
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeOrderDetails() {
+  const modal = document.getElementById('orderDetailsModal');
+  if (!modal) return;
+  modal.classList.remove('open');
+  modal.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+
+function formatNairaAmount(amount) {
+  const numericAmount = Number(amount);
+  if (!Number.isFinite(numericAmount)) return 'N/A';
+  return `₦${numericAmount.toLocaleString(undefined, {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  })}`;
+}
+
+function normalizeOrderAmountLabel(order) {
+  if (!order || typeof order !== 'object') return 'N/A';
+
+  if (typeof order.total === 'number') {
+    return formatNairaAmount(order.total);
+  }
+
+  if (typeof order.totalAmount === 'number') {
+    return formatNairaAmount(order.totalAmount);
+  }
+
+  const rawLabel = String(order.totalLabel || order.amountLabel || '').trim();
+  if (!rawLabel) return 'N/A';
+
+  const numericValue = Number(rawLabel.replace(/[^\d.-]+/g, ''));
+  if (Number.isFinite(numericValue)) {
+    return formatNairaAmount(numericValue);
+  }
+
+  return rawLabel.replace(/\$/g, '₦').replace(/\bUSD\b/gi, 'NGN').replace(/\bUS\s*dollars?\b/gi, 'naira');
+}
+
 function initProfile() {
   const user = readJson('nordluxeUser', {});
-  const searches = readJson('nordluxeSearchHistory', []);
-  const orders = readJson('nordluxeOrderHistory', []);
-  const activities = readJson('nordluxeActivityLog', []);
-  const cart = readJson('nordluxeCart', []);
+  const searches = readJson(getUserKey('nordluxeSearchHistory'), []);
+  const orders = readJson(getUserKey('nordluxeOrderHistory'), []);
+  const activities = readJson(getUserKey('nordluxeActivityLog'), []);
+  const cart = readJson(getUserKey('nordluxeCart'), []);
 
   const displayName = user.name || user.displayName || user.email || 'Customer Profile';
-  document.getElementById('profileName').textContent = displayName;
+  const profileNameEl = document.getElementById('profileName');
+  profileNameEl.innerHTML = `${displayName} <span id="profileOrderId" style="display:none;font-size:16px;font-weight:600;opacity:.9;margin-left:10px;"></span>`;
   document.getElementById('searchCount').textContent = String(searches.length);
-  document.getElementById('orderCount').textContent = String(orders.length);
   document.getElementById('activityCount').textContent = String(activities.length);
   document.getElementById('cartCount').textContent = String(cart.length);
+
+  const lastOrderId = localStorage.getItem('lastOrderId') || '';
+  const fallbackOrderRef = orders.length ? (orders[0].orderCode || orders[0].orderId || orders[0].orderIdShort || orders[0].orderRef || orders[0].txRef || orders[0].transactionId || '') : '';
+  const unlockId = lastOrderId || fallbackOrderRef;
+  setProfileOrderIdLabel(unlockId);
 
   renderList(
     'searchList',
@@ -319,17 +911,7 @@ function initProfile() {
     'No search activity yet. Start exploring collections and products.'
   );
 
-  renderList(
-    'orderList',
-    orders.slice(0, 25),
-    function (order) {
-      const total = typeof order.total === 'number' ? `$${order.total.toFixed(2)}` : (order.totalLabel || 'N/A');
-      const itemCount = Array.isArray(order.items) ? order.items.length : 0;
-      const orderRef = order.orderRef || order.txRef || order.transactionId || 'Pending reference';
-      return `<div class="list-item"><div class="item-title"><span class="badge">${total}</span>${itemCount} item(s)</div><div class="item-meta">Ref: ${orderRef} • ${formatDate(order.createdAt || order.completedAt || order.at)}</div></div>`;
-    },
-    'No orders yet. Your completed orders will show here.'
-  );
+  renderOrderHistory(orders);
 
   renderList(
     'activityList',
@@ -343,20 +925,95 @@ function initProfile() {
   );
 }
 
+function resolveApiBase() {
+  const configuredApiBase = (window.NORDLUXE_API_BASE || '').trim();
+  if (configuredApiBase) {
+    return configuredApiBase;
+  }
+
+  const host = String(window.location.hostname || '').trim();
+  const protocol = String(window.location.protocol || '').trim();
+  const port = String(window.location.port || '').trim();
+  const origin = host ? `${protocol}//${host}${port ? `:${port}` : ''}` : '';
+
+  if (!host || protocol === 'file:') {
+    return 'http://127.0.0.1:3001';
+  }
+
+  if (host === 'localhost' || host === '127.0.0.1') {
+    if (port && port !== '3001') {
+      return 'http://127.0.0.1:3001';
+    }
+    return origin;
+  }
+
+  return origin;
+}
+
+async function loadOrdersFromServer() {
+  const user = readJson('nordluxeUser', {});
+  const email = user.email || '';
+  if (!email) return [];
+
+  const apiBase = resolveApiBase();
+
+  try {
+    const response = await fetch(`${apiBase}/api/users/guest/orders?email=${encodeURIComponent(email)}`);
+    if (!response.ok) return [];
+
+    const data = await response.json();
+    const serverOrders = data && data.success && Array.isArray(data.orders) ? data.orders : [];
+    if (!serverOrders.length) return [];
+
+    const newestOrderId = serverOrders[0] ? (serverOrders[0].orderCode || serverOrders[0]._id || '') : '';
+    setProfileOrderIdLabel(newestOrderId);
+    localStorage.setItem('lastOrderId', newestOrderId);
+    return serverOrders;
+  } catch (e) {
+    console.log('Order sync skipped:', e && e.message ? e.message : e);
+    return [];
+  }
+}
+
 document.getElementById('clearActivityBtn').addEventListener('click', function () {
-  localStorage.removeItem('nordluxeActivityLog');
-  localStorage.removeItem('nordluxeSearchHistory');
+  localStorage.removeItem(getUserKey('nordluxeActivityLog'));
+  localStorage.removeItem(getUserKey('nordluxeSearchHistory'));
   initProfile();
 });
 
-window.addEventListener('DOMContentLoaded', function () {
+document.getElementById('orderList').addEventListener('click', function (event) {
+  const orderRow = event.target.closest('[data-order-index]');
+  if (!orderRow) return;
+  openOrderDetails(Number(orderRow.getAttribute('data-order-index')));
+});
+
+document.getElementById('orderDetailsCloseBtn').addEventListener('click', closeOrderDetails);
+
+document.getElementById('orderDetailsModal').addEventListener('click', function (event) {
+  if (event.target.id === 'orderDetailsModal') {
+    closeOrderDetails();
+  }
+});
+
+document.addEventListener('keydown', function (event) {
+  if (event.key === 'Escape') {
+    closeOrderDetails();
+  }
+});
+
+window.addEventListener('DOMContentLoaded', async function () {
   if (window.AOS) {
     AOS.init({ duration: 700, once: true });
   }
   initProfile();
+  const localOrders = readJson(getUserKey('nordluxeOrderHistory'), []);
+  const serverOrders = await loadOrdersFromServer();
+  renderOrderHistory(localOrders.concat(serverOrders || []));
 });
 </script>
 
+<script src="/assets/js/site-shell.js" defer></script>
+<script src="/assets/js/site-audio.js" defer></script>
 <script src="/assets/js/site-nav.js"></script>
 </body>
 </html>

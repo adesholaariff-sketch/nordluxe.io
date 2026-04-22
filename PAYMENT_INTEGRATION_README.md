@@ -8,7 +8,6 @@ This guide will help you integrate Flutterwave payment processing with your NORD
 
 1. **Flutterwave Account**: Sign up at [flutterwave.com](https://flutterwave.com)
 2. **Node.js**: Version 14 or higher
-3. **MongoDB**: For storing orders (optional but recommended)
 4. **Gmail Account**: For email notifications
 
 ### 🔧 Step 1: Install Dependencies
@@ -27,17 +26,15 @@ FLUTTERWAVE_PUBLIC_KEY=your_flutterwave_public_key_here
 FLUTTERWAVE_SECRET_KEY=your_flutterwave_secret_key_here
 FLUTTERWAVE_SECRET_HASH=your_webhook_secret_hash_here
 
-# Email Configuration (Gmail)
-EMAIL_USER=your_email@gmail.com
-EMAIL_PASS=your_app_password_here
+# Email Configuration (Resend)
+RESEND_API_KEY=re_your_resend_api_key_here
+EMAIL_FROM=NORDLUXE <noreply@yourdomain.com>
 ADMIN_EMAIL=your_admin_email@gmail.com
 
 # Server Configuration
 PORT=3001
 FRONTEND_URL=http://localhost:8000
 
-# Database (Optional)
-MONGODB_URI=mongodb://localhost:27017/nordluxe
 ```
 
 ### 🔧 Step 3: Get Flutterwave Credentials
@@ -47,14 +44,12 @@ MONGODB_URI=mongodb://localhost:27017/nordluxe
 3. **Copy your Public Key and Secret Key**
 4. **Generate a Webhook Secret Hash**
 
-### 🔧 Step 4: Setup Gmail for Notifications
+### 🔧 Step 4: Setup Resend for Email
 
-1. **Enable 2-Factor Authentication** on your Gmail account
-2. **Generate an App Password**:
-   - Go to Google Account settings
-   - Security > 2-Step Verification > App passwords
-   - Generate password for "Mail"
-3. **Use the App Password** in your `.env` file (not your regular password)
+1. **Create an account** at [resend.com](https://resend.com)
+2. **Verify your sending domain** in the Resend dashboard
+3. **Generate an API key** and add it as `RESEND_API_KEY` in your `.env`
+4. **Set `EMAIL_FROM`** to an address on your verified domain
 
 ### 🔧 Step 5: Configure Webhook URL
 
@@ -115,21 +110,12 @@ The system sends:
 - CORS protection
 - Environment variable protection
 
-### 🗄️ Database Schema (Optional)
-
-If using MongoDB, orders are stored with:
-- Customer information
-- Order items
-- Payment status
-- Transaction references
-
-### 🚀 Production Deployment
+###  Production Deployment
 
 1. **Set up domain and SSL**
 2. **Update webhook URL** in Flutterwave dashboard
 3. **Configure production environment variables**
-4. **Set up MongoDB database**
-5. **Deploy backend to Heroku/AWS/DigitalOcean**
+4. **Deploy backend to Vercel or similar**
 6. **Update frontend API calls** to production URL
 
 ### 🆘 Troubleshooting

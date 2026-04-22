@@ -3,8 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Sign in to your NORDLUXE account to manage orders, profile settings, and checkout for royal luxury pieces.">
+<meta name="robots" content="noindex, nofollow">
 
-<title>Login - NORDLUXE | Scandinavian Luxury</title>
+<title>Login | NORDLUXE Account</title>
 
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -18,7 +20,8 @@
     GoogleAuthProvider,
     signInWithPopup,
     createUserWithEmailAndPassword,
-    signInWithEmailAndPassword
+    signInWithEmailAndPassword,
+    sendPasswordResetEmail
   } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
 
   // ✅ YOUR CONFIG (leave as is)
@@ -40,6 +43,7 @@
   window.firebaseAuth = auth;
   window.createUserWithEmailAndPassword = createUserWithEmailAndPassword;
   window.signInWithEmailAndPassword = signInWithEmailAndPassword;
+  window.sendPasswordResetEmail = sendPasswordResetEmail;
 
   // 🔥 GOOGLE LOGIN (REAL)
   window.handleGoogleAuth = function () {
@@ -102,6 +106,20 @@ position:sticky;
 top:0;
 z-index:1000;
 box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+.nav-links{
+display:flex;
+align-items:center;
+flex-shrink:0;
+white-space:nowrap;
+overflow-x:auto;
+scrollbar-width:none;
+-ms-overflow-style:none;
+}
+
+.nav-links::-webkit-scrollbar{
+display:none;
 }
 
 .nav-left{
@@ -357,6 +375,23 @@ outline:none;
 border-color:#d19b48;
 }
 
+.forgot-link{
+display:inline-block;
+margin:-8px 0 16px;
+padding:0;
+background:none;
+border:none;
+color:#d19b48;
+font-size:14px;
+font-weight:600;
+cursor:pointer;
+text-decoration:underline;
+}
+
+.forgot-link:hover{
+color:#b17f38;
+}
+
 .btn-primary{
 width:100%;
 padding:12px;
@@ -518,6 +553,37 @@ color:#ffffff;
   border-bottom: none;
 }
 
+@media (max-width:900px){
+nav{padding:20px 30px;}
+.nav-links{gap:15px; padding:0 10px;}
+nav a{margin-left:0; font-size:14px; flex-shrink:0;}
+.cart-btn{padding:8px 16px !important; font-size:13px !important;}
+}
+
+@media (max-width:768px){
+.nav-links{gap:12px;}
+nav a{font-size:13px;}
+.cart-btn{padding:7px 14px !important; font-size:12px !important;}
+}
+
+@media (max-width:600px){
+nav{padding:18px 20px;}
+.nav-links{gap:10px; padding:0 5px;}
+nav a{font-size:12px;}
+.cart-btn{padding:6px 12px !important; font-size:11px !important;}
+}
+
+@media (max-width:480px){
+.nav-links{gap:8px;}
+nav a{font-size:11px;}
+.cart-btn{display:none;}
+}
+
+@media (max-width:360px){
+.nav-links{gap:6px;}
+nav a{font-size:10px;}
+}
+
 .user-dropdown a:hover {
   background: #f5f5f5;
   color: #d19b48;
@@ -550,6 +616,7 @@ color:#ffffff;
     <button class="user-btn" onclick="toggleUserMenu()">👤</button>
     <div class="user-dropdown" id="userDropdown">
       <a href="login.html">Login / Signup</a>
+      <a href="orders.html">My Orders</a>
       <a href="cart.html">Cart</a>
       <a href="collections.html">Collection</a>
       <a href="story.html">Story</a>
@@ -585,13 +652,6 @@ Continue with Google
 </svg>
 Continue with Apple
 </a>
-
-<button class="login-btn email" onclick="showEmailForm()">
-<svg width="20" height="20" viewBox="0 0 24 24">
-<path fill="currentColor" d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-</svg>
-Continue with Email
-</button>
 
 <button class="login-btn password" onclick="showPasswordForm()">
 <svg width="20" height="20" viewBox="0 0 24 24">
@@ -639,12 +699,12 @@ Sign In / Sign Up
 <label for="signinPassword">Password</label>
 <input type="password" id="signinPassword" name="password" required>
 </div>
+<button type="button" class="forgot-link" onclick="handleForgotPassword()">Forgot Password?</button>
 <button type="submit" class="btn-primary">Sign In</button>
 
 <div class="alt-options">
 <div class="divider"><span>or</span></div>
 <div class="shortcut-row">
-<button type="button" class="shortcut-btn" onclick="showSignIn()"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg> Email</button>
 <button type="button" class="shortcut-btn" onclick="window.location.href='/auth/apple'"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg> Apple</button>
 <button type="button" class="shortcut-btn" onclick="loginWithGoogle()"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="currentColor" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="currentColor" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="currentColor" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg> Google</button>
 </div>
@@ -673,7 +733,6 @@ Sign In / Sign Up
 <div class="alt-options">
 <div class="divider"><span>or</span></div>
 <div class="shortcut-row">
-<button type="button" class="shortcut-btn" onclick="showSignUp()"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg> Email</button>
 <button type="button" class="shortcut-btn" onclick="window.location.href='/auth/apple'"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg> Apple</button>
 <button type="button" class="shortcut-btn" onclick="loginWithGoogle()"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="currentColor" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="currentColor" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="currentColor" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg> Google</button>
 </div>
@@ -776,6 +835,72 @@ async function handleSignIn(event) {
   }
 }
 
+function resolveApiBase() {
+  const configuredApiBase = (window.NORDLUXE_API_BASE || '').trim();
+  if (configuredApiBase) {
+    return configuredApiBase;
+  }
+
+  const host = String(window.location.hostname || '').trim();
+  const protocol = String(window.location.protocol || '').trim();
+  const port = String(window.location.port || '').trim();
+  const origin = host ? `${protocol}//${host}${port ? `:${port}` : ''}` : '';
+
+  if (!host || protocol === 'file:') {
+    return 'http://127.0.0.1:3001';
+  }
+
+  if (host === 'localhost' || host === '127.0.0.1') {
+    if (port && port !== '3001') {
+      return 'http://127.0.0.1:3001';
+    }
+    return origin;
+  }
+
+  return origin;
+}
+
+async function handleForgotPassword() {
+  const email = document.getElementById('signinEmail').value.trim();
+  const apiBase = resolveApiBase();
+
+  if (!email) {
+    showMessage('Enter your email first, then click Forgot Password.', 'error');
+    return;
+  }
+
+  try {
+    const response = await fetch(`${apiBase}/auth/password/reset-request`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email })
+    });
+
+    const data = response.headers.get('content-type')?.includes('application/json')
+      ? await response.json()
+      : { success: false, message: 'Reset service returned an unexpected response.' };
+
+    if (response.ok && data.success) {
+      showMessage(data.message || 'If an Email/Password account exists, a reset link has been sent.', 'success');
+    } else {
+      const backendNotConfigured = response.status === 503 || (data.message && data.message.toLowerCase().includes('not configured'));
+      if (backendNotConfigured) {
+        await window.sendPasswordResetEmail(window.firebaseAuth, email);
+        showMessage('Password reset link sent. Please check your email (and spam folder).', 'success');
+        return;
+      }
+      showMessage(data.message || 'Unable to send reset email.', 'error');
+    }
+  } catch (error) {
+    try {
+      await window.sendPasswordResetEmail(window.firebaseAuth, email);
+      showMessage('Password reset link sent. Please check your email (and spam folder).', 'success');
+    } catch (fallbackError) {
+      showMessage('Unable to send reset email right now. Ensure backend is running on port 3001.', 'error');
+    }
+  }
+}
+
 async function handleSignUp(event) {
   event.preventDefault();
   const name = document.getElementById('signupName').value;
@@ -835,6 +960,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
 </script>
 
+<script src="/assets/js/site-shell.js" defer></script>
+<script src="/assets/js/site-audio.js" defer></script>
 <script src="/assets/js/site-nav.js"></script>
 </body>
 </html>
