@@ -2,10 +2,10 @@
   "name": "nordluxe-website",
   "version": "1.0.0",
   "description": "NORDLUXE - Scandinavian Luxury Fashion Website",
-  "main": "index.js",
+  "main": "assets/js/server.js",
   "scripts": {
-    "start": "node assets/js/server.js",
     "dev": "nodemon assets/js/server.js",
+  "start": "node assets/js/server.js",
     "build": "echo 'Static site - no build needed'",
     "deploy": "bash deploy.sh",
     "security-audit": "bash security-audit.sh",
