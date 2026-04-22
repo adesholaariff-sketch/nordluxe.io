@@ -42,7 +42,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Serve static files
-app.use(express.static('.'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Session
 app.use(session({
@@ -1312,6 +1312,9 @@ async function checkAndSendReminders() {
   }
 }
 
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/../public/index.html");
+});
 // Auth routes
 if (process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET) {
   app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
